@@ -7,8 +7,6 @@ import SupportModal from "../Modal/SupportModal";
 import MyProfileModal from "../Modal/MyProfileModal";
 import { NavigationContext } from "./NavigationContext";
 
-import ImgBackground from "/src/assets/img/main-background.jpg";
-
 const Layout = () => {
     const { contextData } = useContext(AppContext);
     const [selectedPage, setSelectedPage] = useState("lobby");
@@ -178,7 +176,6 @@ const Layout = () => {
                             handleLogoutClick={handleLogoutClick}
                         />
                     )}
-                    <div className="bg" style={{ backgroundImage: `url(${ImgBackground})` }}></div>
                     <Outlet context={{ isSlotsOnly, isLogin, isMobile, userBalance, supportParent, openSupportModal, handleLoginClick, handleMyProfileClick }} />
 
                     <SupportModal

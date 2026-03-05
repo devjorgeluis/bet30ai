@@ -2,12 +2,7 @@ import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Slideshow from "../Home/Slideshow";
 import CasinoSlideshow from "../Casino/Slideshow";
-import LiveCasinoSlideshow from "../LiveCasino/Slideshow";
-import ImgLogo from "/src/assets/img/logo.png";
-import ImgHome from "/src/assets/img/home.png";
-import ImgCasino from "/src/assets/img/casino.png";
-import ImgLiveCasino from "/src/assets/img/live-casino.png";
-import ImgSports from "/src/assets/img/sports.png";
+import ImgLogo from "/src/assets/img/logo.webp";
 import ImgSupport from "/src/assets/svg/support-black.svg";
 import ImgProfile from "/src/assets/svg/profile.svg";
 
@@ -31,14 +26,14 @@ const Header = ({
 
     const navItems = isSlotsOnly === "false"
         ? [
-            { path: ["/", "/home"], label: "INICIO", image: ImgHome },
-            { path: ["/casino"], label: "CASINO", image: ImgCasino },
-            { path: ["/live-casino"], label: "CASINO EN VIVO", image: ImgLiveCasino },
-            { path: ["/sports"], label: "DEPORTES", image: ImgSports },
+            { path: ["/", "/home"], label: "INICIO" },
+            { path: ["/casino"], label: "CASINO" },
+            { path: ["/live-casino"], label: "CASINO EN VIVO" },
+            { path: ["/sports"], label: "DEPORTES" },
         ]
         : [
-            { path: ["/", "/home"], label: "INICIO", image: ImgHome },
-            { path: ["/casino"], label: "CASINO", image: ImgCasino },
+            { path: ["/", "/home"], label: "INICIO" },
+            { path: ["/casino"], label: "CASINO" },
         ];
 
     const isActive = (paths) => {
@@ -135,7 +130,7 @@ const Header = ({
                             <div className="header-wrapper">
                                 <NavLinks />
                                 {
-                                    isCasinoPage ? <CasinoSlideshow /> : isLiveCasinoPage ? <LiveCasinoSlideshow /> : !isSportsPage ? <Slideshow /> : <></>
+                                    isCasinoPage ? <CasinoSlideshow /> : !isSportsPage ? <Slideshow /> : <></>
                                 }
                             </div>
                         </header>

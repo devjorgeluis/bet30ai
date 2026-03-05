@@ -6,16 +6,12 @@ import { callApi } from "../utils/Utils";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import ProviderContainer from "../components/Home/ProviderContainer";
-import BannerContainer from "../components/Home/BannerContainer";
 import HotGameSlideshow from "../components/Home/HotGameSlideshow";
 import GameModal from "../components/Modal/GameModal";
 import GameCard from "../components/GameCard";
 import LoadApi from "../components/Loading/LoadApi";
 
-import Icon1 from "/src/assets/img/1.gif";
-import Icon2 from "/src/assets/img/2.gif";
-import Icon3 from "/src/assets/img/3.gif";
-import Icon4 from "/src/assets/img/4.gif";
+import Icon1 from "/src/assets/img/trending.webp";
 
 let selectedGameId = null;
 let selectedGameType = null;
@@ -618,7 +614,7 @@ const Home = () => {
                                   name="casino"
                                   title="Casino"
                                   isMobile={isMobile}
-                                  icon={Icon3}
+                                  icon={Icon1}
                                   link="/casino"
                                   onGameClick={(game) => {
                                     if (isLogin) {
@@ -635,7 +631,7 @@ const Home = () => {
                                   name="liveCasino"
                                   title="Casino en Vivo"
                                   isMobile={isMobile}
-                                  icon={Icon4}
+                                  icon={Icon1}
                                   link="/live-casino"
                                   onGameClick={(game) => {
                                     if (isLogin) {
@@ -652,7 +648,7 @@ const Home = () => {
                                   name="arcade"
                                   title="Crash Games"
                                   isMobile={isMobile}
-                                  icon={Icon2}
+                                  icon={Icon1}
                                   link="/casino"
                                   onGameClick={(game) => {
                                     if (isLogin) {
@@ -671,8 +667,6 @@ const Home = () => {
                 }
               </div>
             </div>
-
-            <BannerContainer />
           </div>
           <Footer />
         </>

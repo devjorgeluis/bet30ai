@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from '../../AppContext';
 import GameCard from '../GameCard';
-import ImgTitle from "/src/assets/img/5.gif";
 
 const GameSlideshow = ({ games, title, onGameClick, slideshowKey, loadMoreContent }) => {
     const { contextData } = useContext(AppContext);
@@ -16,7 +15,6 @@ const GameSlideshow = ({ games, title, onGameClick, slideshowKey, loadMoreConten
     return (
         <div className="games-group-wrapper">
             <div className="games-group-title-wrapper">
-                <img className="games-group-emoji" src={ImgTitle} />
                 <h3 className="games-group-title">{title}</h3>
                 <div className="games-group-title-line"></div>
                 <a className="games-group-view-all" onClick={loadMoreContent}>Ver Mas &gt;</a>

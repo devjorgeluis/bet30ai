@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { callApi } from "../utils/Utils";
 import LoadApi from "../components/Loading/LoadApi";
-import ImgLogo from "/src/assets/img/logo.png";
-import ImgShow from "/src/assets/img/show-password.png";
-import ImgHide from "/src/assets/img/hide-password.png";
+import ImgLogo from "/src/assets/img/logo.webp";
+// import ImgShow from "/src/assets/img/show-password.png";
+// import ImgHide from "/src/assets/img/hide-password.png";
 
 const Login = () => {
     const { contextData, updateSession } = useContext(AppContext);
@@ -115,13 +115,13 @@ const Login = () => {
                                                     onChange={(e) => setPassword(e.target.value)}
                                                     disabled={isLoading}
                                                 />
-                                                <img
+                                                {/* <img
                                                     src={showPassword ? ImgHide : ImgShow}
                                                     id="togglePassword"
                                                     alt="Contraseña"
                                                     className="toggle-password"
                                                     onClick={() => setShowPassword(!showPassword)}
-                                                />
+                                                /> */}
                                             </div>
                                         </div>
                                     </div>
