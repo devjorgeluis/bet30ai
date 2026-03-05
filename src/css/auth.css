@@ -1,0 +1,193 @@
+body {
+    background: var(--body_background_color);
+    color: var(--body_text_color);
+}
+
+img {
+    max-width: 100%;
+}
+
+.navbar-brand {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.languages {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.languages img {
+    width: 30px;
+    margin: 10px;
+}
+
+.logo {
+    text-align: center;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+html .card {
+    background: var(--card_background_color);
+    border-radius: var(--border_radius);
+    border: 1px solid var(--border_color);
+}
+
+.btn-primary {
+    background: var(--button_background_color) !important;
+    border: 0.1rem solid var(--button_background_color) !important;
+    border-radius: var(--border_radius) !important;
+    color: var(--button_text_color) !important;
+}
+
+.btn-primary:hover {
+    background: var(--button_background_color);
+    border: 0.1rem solid var(--button_background_color);
+    opacity: 0.7;
+}
+
+.btn-link {
+    color: var(--button_background_color);
+}
+
+.btn-link:hover {
+    color: var(--button_background_color);
+    opacity: 0.7;
+}
+
+input {
+    border: 0.1rem solid var(--button_background_color);
+    border-radius: var(--border_radius);
+    color: var(--body_text_color);
+}
+
+.form-group {
+    justify-content: center;
+}
+
+.form-check {
+    padding: .375rem .75rem;
+    padding-left: 1.25rem;
+}
+
+.forget.btn {
+    padding: .375rem .75rem;
+    padding-left: 1.25rem;
+}
+
+.user-cta-button-wrapper {
+    text-align: center;
+}
+
+.user-cta-button-wrapper button {
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.chat-with-us {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 2;
+    height: 40px;
+}
+
+.chat-with-us>a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+html .card-body {
+    padding-top: 50px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .8;
+}
+
+.phone-country-code {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .8;
+    font-size: 1.2rem;
+    color: #495057;
+}
+
+html input[type='password'] {
+    padding-right: 36px;
+}
+
+html .form-control {
+    font-size: 16px;
+    color: #222;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    background-image: none !important;
+    margin-bottom: 0;
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+input::placeholder {
+    opacity: 0.5 !important;
+}
+
+.iti {
+    width: 100%;
+}
+
+html .iti__country-name {
+    color: #222;
+}
+
+html .invalid-feedback-phone {
+    position: absolute;
+    width: 100%;
+    font-size: 80%;
+    color: #e3342f;
+}
+
+.login-btn .loading-icon {
+    width: 20px;
+    display: inline;
+    margin-left: 5px;
+}
+
+.login-btn .mt-3 {
+    margin-top: 0 !important;
+}
