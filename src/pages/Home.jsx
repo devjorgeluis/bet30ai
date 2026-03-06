@@ -4,6 +4,7 @@ import { AppContext } from "../AppContext";
 import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
 import Header from "../components/Layout/Header";
+import Slideshow from "../components/Home/Slideshow";
 import Footer from "../components/Layout/Footer";
 import ProviderContainer from "../components/Home/ProviderContainer";
 import HotGameSlideshow from "../components/Home/HotGameSlideshow";
@@ -505,15 +506,14 @@ const Home = () => {
             supportParent={supportParent}
             openSupportModal={openSupportModal}
           />
-          <div className={getContentClass()}>
-            <div className="header container-full">
-              <ProviderContainer
-                categories={categories}
-                selectedProvider={selectedProvider}
-                setSelectedProvider={setSelectedProvider}
-                onProviderSelect={handleProviderSelect}
-              />
-            </div>
+          <Slideshow />
+          <main className="flex flex-col px-2 md:px-4 pb-3">
+            <ProviderContainer
+              categories={categories}
+              selectedProvider={selectedProvider}
+              setSelectedProvider={setSelectedProvider}
+              onProviderSelect={handleProviderSelect}
+            />
             <div className="casino container-full">
               <div className="games">
                 {
@@ -667,7 +667,7 @@ const Home = () => {
                 }
               </div>
             </div>
-          </div>
+          </main>
           <Footer />
         </>
       )}
