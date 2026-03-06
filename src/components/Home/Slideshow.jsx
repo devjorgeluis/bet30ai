@@ -1,4 +1,4 @@
-// import ImgSlide1 from "/src/assets/img/slide1.jpg";
+import VideoSlideshow from "/src/assets/video/slideshow.mp4";
 
 const Slideshow = () => {
   return (
@@ -9,7 +9,7 @@ const Slideshow = () => {
             <div className="lcms_container">
               <div className="lcms_slide lcms_active_slide">
                 <div className="lcms_inner">
-                  {/* <div className="lcms_bg" style={{ backgroundImage: `url(${ImgSlide1})` }}></div> */}
+                  <video src={VideoSlideshow} autoPlay className="w-full h-full object-cover mask-gradient max-h-[70vh]"></video>
                 </div>
               </div>
             </div>

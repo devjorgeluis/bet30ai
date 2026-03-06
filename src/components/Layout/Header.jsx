@@ -1,14 +1,11 @@
-import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Slideshow from "../Home/Slideshow";
-import CasinoSlideshow from "../Casino/Slideshow";
 import ImgLogo from "/src/assets/img/logo.webp";
 import ImgSupport from "/src/assets/svg/support-black.svg";
+import ImgHamburger from "/src/assets/svg/hamburger.svg";
 import ImgProfile from "/src/assets/svg/profile.svg";
 
 const Header = ({
     isLogin,
-    isMobile,
     isSlotsOnly,
     userBalance,
     handleLoginClick,
@@ -18,29 +15,27 @@ const Header = ({
     const navigate = useNavigate();
     const location = useLocation();
     const pathname = location?.pathname ?? "";
-    const dropdownRef = useRef(null);
-
-    const isCasinoPage = location.pathname === "/casino";
-    const isLiveCasinoPage = location.pathname === "/live-casino";
-    const isSportsPage = location.pathname === "/sports" || location.pathname === "/live-sports";
 
     const navItems = isSlotsOnly === "false"
         ? [
-            { path: ["/", "/home"], label: "INICIO" },
-            { path: ["/casino"], label: "CASINO" },
-            { path: ["/live-casino"], label: "CASINO EN VIVO" },
-            { path: ["/sports"], label: "DEPORTES" },
+            { path: ["/", "/home"], label: "Home" },
+            { path: ["/casino"], label: "Slots" },
+            { path: ["/live-casino"], label: "Casino en vivo" },
+            { path: ["/sports"], label: "Deportes" },
         ]
         : [
-            { path: ["/", "/home"], label: "INICIO" },
-            { path: ["/casino"], label: "CASINO" },
+            { path: ["/", "/home"], label: "Home" },
+            { path: ["/casino"], label: "Slots" },
         ];
 
     const isActive = (paths) => {
         if (Array.isArray(paths)) {
-            return paths.some((p) =>
-                p === "/" ? pathname === "/" : pathname.startsWith(p)
-            );
+            return paths.some((p) => {
+                if (p === "/") {
+                    return pathname === "/" || pathname === "/home";
+                }
+                return pathname.startsWith(p);
+            });
         }
         return pathname.startsWith(paths);
     };
@@ -55,135 +50,66 @@ const Header = ({
     };
 
     const NavLinks = () => (
-        <nav className="main-nav filled-buttons loaded">
+        <ul className="relative gap-x-2 lg:gap-x-10 xl:gap-x-20 hidden md:flex items-center justify-center min-w-96">
             {navItems.map((item, idx) => (
-                <a
+                <li
                     key={idx}
-                    className={`nav-link-wrapper${isActive(item.path) ? " active" : ""}`}
-                    href={Array.isArray(item.path) ? item.path[0] : item.path}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        navigate(Array.isArray(item.path) ? item.path[0] : item.path);
-                    }}
-                >
-                    <img className="main-nav-img" src={item.image} alt={item.label} />
-                    <span className="text">{item.label}</span>
-                </a>
+                    className={`text-sm text-nowrap rounded-full px-2 lg:px-4 py-2 flex justify-center items-center tracking-wide ${isActive(item.path) && "bg-button"} text-bodyText`}>
+                    <a
+                        href={Array.isArray(item.path) ? item.path[0] : item.path}
+                        className={`${isActive(item.path) ? " router-link-active router-link-exact-active" : ""}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            navigate(Array.isArray(item.path) ? item.path[0] : item.path);
+                        }}
+                    >
+                        {item.label}
+                    </a>
+                </li>
             ))}
-        </nav>
-    );
-
-    const BalanceBlock = () => (
-        <div className="balance-wrapper">
-            <span className="icon-balance"></span>
-            <span id="balance" className="balance">
-                {formatBalance(userBalance)}
-            </span>
-        </div>
+        </ul>
     );
 
     return (
-        <div className="body-container">
-            <div className="body-scrollable">
-                {isMobile ? (
-                    <>
-                        <div className="logo-menu row container-full">
-                            <div className="column column-50">
-                                <div className="header-left">
-                                    <div className="logo">
-                                        <a href="/">
-                                            <img
-                                                title="Logo"
-                                                alt="Logo"
-                                                src={ImgLogo}
-                                                className="max-h-full"
-                                            />
-                                        </a>
+        <div className="w-full min-h-16 bg-color-nav flex justify-between items-center px-3 sticky top-0 z-50">
+            <div className="flex items-center gap-2">
+                <button className="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors flex-shrink-0">
+                    <img src={ImgHamburger} className="text-gray-300" />
+                </button>
+                <div className="flex-shrink-0">
+                    <a onClick={() => navigate("/")} className="router-link-active router-link-exact-active" aria-current="page">
+                        <img src={ImgLogo} className="w-[5.5rem] max-h-[170px] md:w-40 md:my-1 contain-content cursor-pointer" alt="Bet30" />
+                    </a>
+                </div>
+            </div>
+            <NavLinks />
+            <div className="flex items-center gap-2">
+                <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                    <img src={ImgSupport} />
+                </button>
+                {
+                    isLogin ?
+                        <>
+                            <div className="flex items-center justify-center">
+                                <button className="relative p-[1px] rounded-full group bg-button">
+                                    <div className="px-3 py-1 md:px-2 bg-provider-color rounded-full group-hover:bg-opacity-90 transition-all duration-300">
+                                        <span className="text-bodyText text-sm xl:text-lg text-nowrap font-bold"> $ {formatBalance(userBalance)} </span>
                                     </div>
-                                </div>
+                                </button>
                             </div>
-                            <div className="column column-50 header-right-wrapper">
-                                <div className="header-right">
-                                    <button className="button-support" onClick={() => { openSupportModal(false); }}>
-                                        <img src={ImgSupport} />
-                                    </button>
-                                    {isLogin ? (
-                                        <>
-                                            <BalanceBlock />
-                                            <div className="burger profile-pic" onClick={() => handleMyProfileClick()}>
-                                                <img src={ImgProfile} />
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <button
-                                            className="button button--login"
-                                            onClick={handleLoginClick}
-                                        >
-                                            Iniciar sesión
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-
-                        <header className="header container-full">
-                            <div className="header-wrapper">
-                                <NavLinks />
-                                {
-                                    isCasinoPage ? <CasinoSlideshow /> : !isSportsPage ? <Slideshow /> : <></>
-                                }
-                            </div>
-                        </header>
-                    </>
-                ) : (
-                    <>
-                        <div className="logo-menu row container-full">
-                            <div className="column column-50">
-                                <div className="header-left">
-                                    <div className="logo">
-                                        <a href="/">
-                                            <img
-                                                title="Logo"
-                                                alt="Logo"
-                                                src={ImgLogo}
-                                                className="max-h-full"
-                                            />
-                                        </a>
+                            <div>
+                                <button className="relative p-[1px] rounded-full group bg-button" onClick={() => handleMyProfileClick()}>
+                                    <div className="px-2 py-2 bg-provider-color rounded-full group-hover:bg-opacity-90 transition-all duration-300 flex justify-center items-center">
+                                        <img src={ImgProfile} className="w-5 h-5 text-white" />
                                     </div>
-                                    <NavLinks />
-                                </div>
+                                </button>
                             </div>
-                            <div className="column column-50 header-right-wrapper">
-                                <div className="header-right">
-                                    <button className="button-support" onClick={() => { openSupportModal(false); }}>
-                                        <img src={ImgSupport} />
-                                    </button>
-                                    {isLogin ? (
-                                        <>
-                                            <BalanceBlock />
-                                            <div
-                                                className="burger profile-pic"
-                                                onClick={() => handleMyProfileClick()}
-                                            >
-                                                <img src={ImgProfile} />
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <button
-                                            className="button button--login"
-                                            onClick={handleLoginClick}
-                                        >
-                                            Iniciar sesión
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        {
-                            isCasinoPage ? <CasinoSlideshow /> : isLiveCasinoPage ? <LiveCasinoSlideshow /> : !isSportsPage ? <Slideshow /> : <></>
-                        }
-                    </>
-                )}
+                        </> :
+                        <button className="px-3 py-2 rounded-full h-full bg-button flex gap-1" onClick={handleLoginClick}>
+                            <span className="text-white">Acceder</span>
+                            <img src={ImgProfile} className="w-5 h-5 text-white" />
+                        </button>
+                }
             </div>
         </div>
     );
