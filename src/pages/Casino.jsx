@@ -5,6 +5,7 @@ import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
+import CasinoSlideshow from "../components/Casino/Slideshow";
 import GameSlideshow from "../components/Home/GameSlideshow";
 import GameCard from "/src/components/GameCard";
 import GameModal from "../components/Modal/GameModal";
@@ -488,6 +489,7 @@ const Casino = () => {
             supportParent={supportParent}
             openSupportModal={openSupportModal}
           />
+          <CasinoSlideshow />
           <div className={getContentClass()}>
             <div className="container-full">
               <header className="header">
