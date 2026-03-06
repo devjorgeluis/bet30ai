@@ -1,3 +1,15 @@
+a {
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.loading-icon {
+    margin: auto;
+}
+
 .scrollbar-thin::-webkit-scrollbar {
     height: 4px;
     width: 5px
@@ -5666,9 +5678,8 @@ body {
     overflow: hidden
 }
 
-.div-image-container img {
-    -o-object-fit: contain;
-    object-fit: contain;
+.div-image-container .img {
+    object-fit: cover;
     -o-object-position: center;
     object-position: center;
     width: 100%;

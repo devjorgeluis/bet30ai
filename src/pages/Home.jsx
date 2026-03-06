@@ -519,7 +519,7 @@ const Home = () => {
                 {
                   (selectedProvider || isSingleCategoryView) ? (
                     <>
-                      <div className="games-list">
+                      <div className="grid grid-cols-3 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 xl:grid-cols-8 py-2">
                         {games.map((game, idx) => (
                           <GameCard
                             key={`list-${activeCategory?.id || 'search'}-${game.id}-${idx}`}
@@ -553,10 +553,10 @@ const Home = () => {
                       )}
 
                       {games.length > 0 && (
-                        <div className="load-more-wrapper">
-                          <a className="button" onClick={loadMoreGames}>
-                            VER MÁS
-                          </a>
+                        <div className="flex justify-center mt-8">
+                          <button className="px-6 py-2 rounded-full shadow-xl bg-gradient-to-r from-blue-800 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity" onClick={loadMoreGames}>
+                            Ver más
+                          </button>
                         </div>
                       )}
                     </>
@@ -564,7 +564,7 @@ const Home = () => {
                     <>
                       {isSingleCategoryView ? (
                         <>
-                          <div className="games-list">
+                          <div className="grid grid-cols-3 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 xl:grid-cols-8 py-2">
                             {games.map((game, idx) => (
                               <GameCard
                                 key={`cat-${selectedCategoryIndex}-${game.id}-${idx}`}
@@ -580,10 +580,10 @@ const Home = () => {
                           {isLoadingGames && <LoadApi />}
 
                           {games.length > 0 && (
-                            <div className="load-more-wrapper">
-                              <a className="button" onClick={loadMoreGames}>
-                                VER MÁS
-                              </a>
+                            <div className="flex justify-center mt-8">
+                              <button className="px-6 py-2 rounded-full shadow-xl bg-gradient-to-r from-blue-800 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity" onClick={loadMoreGames}>
+                                Ver más
+                              </button>
                             </div>
                           )}
                         </>
