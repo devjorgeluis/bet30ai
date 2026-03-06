@@ -547,8 +547,8 @@ const Home = () => {
                       {isLoadingGames && <LoadApi />}
 
                       {!isLoadingGames && games.length === 0 && isSingleCategoryView === false && (
-                        <div className="no-games">
-                          <h2>Sin Juegos</h2>
+                        <div className="w-full px-4 py-2">
+                          <span className="text-white">No se encontraron juegos para este proveedor</span>
                         </div>
                       )}
 
