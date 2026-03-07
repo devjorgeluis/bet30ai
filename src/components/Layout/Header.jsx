@@ -22,6 +22,7 @@ const Header = ({
             { path: ["/casino"], label: "Slots" },
             { path: ["/live-casino"], label: "Casino en vivo" },
             { path: ["/sports"], label: "Deportes" },
+            { path: ["/live-sports"], label: "Deportes en vivo" },
         ]
         : [
             { path: ["/", "/home"], label: "Home" },

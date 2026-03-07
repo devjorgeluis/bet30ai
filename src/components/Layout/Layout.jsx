@@ -32,17 +32,6 @@ const Layout = () => {
     };
 
     useEffect(() => {
-        const root = document.getElementById("root");
-        if (!root) return;
-
-        if (location.pathname.startsWith("/sports") || location.pathname.startsWith("/live-sports")) {
-            root.classList.add("sport-page");
-        } else {
-            root.classList.remove("sport-page");
-        }
-    }, [location.pathname]);
-
-    useEffect(() => {
         if (contextData.session != null) {
             setIsLogin(true);
             if (contextData.session.user && contextData.session.user.balance) {

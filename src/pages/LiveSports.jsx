@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { callApi } from "../utils/Utils";
+import Header from "../components/Layout/Header";
 import LoadApi from "../components/Loading/LoadApi";
 
 const LiveSports = () => {
@@ -10,6 +11,7 @@ const LiveSports = () => {
     const [sportsEmbedUrl, setSportsEmbedUrl] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
+    const { isSlotsOnly, isLogin, isMobile, userBalance, supportParent, openSupportModal, handleLoginClick, handleMyProfileClick } = useOutletContext();
 
     useEffect(() => {
         loadSportsPage();
@@ -20,7 +22,7 @@ const LiveSports = () => {
         callApi(contextData, "GET", "/get-page?page=sportslive", callbackGetPage, null);
     };
 
-    const callbackGetPage = (result) => {        
+    const callbackGetPage = (result) => {
         if (result.status === 500 || result.status === 422) {
         } else {
             setSportsEmbedUrl(result.data.url_embed);
@@ -29,7 +31,17 @@ const LiveSports = () => {
     };
 
     return (
-        <div className="sports">
+        <>
+            <Header
+                isLogin={isLogin}
+                isMobile={isMobile}
+                isSlotsOnly={isSlotsOnly}
+                userBalance={userBalance}
+                handleLoginClick={handleLoginClick}
+                handleMyProfileClick={handleMyProfileClick}
+                supportParent={supportParent}
+                openSupportModal={openSupportModal}
+            />
             {isLoading ? (
                 <LoadApi />
             ) : sportsEmbedUrl ? (
@@ -58,7 +70,7 @@ const LiveSports = () => {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 };
 
