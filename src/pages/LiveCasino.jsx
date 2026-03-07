@@ -6,6 +6,7 @@ import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import GameCard from "/src/components/GameCard";
 import GameModal from "../components/Modal/GameModal";
+import LiveCasinoSlideshow from "../components/LiveCasino/Slideshow";
 import ProviderContainer from "../components/ProviderContainer";
 import SearchInput from "../components/SearchInput";
 import LoadApi from "../components/Loading/LoadApi";
@@ -391,100 +392,71 @@ const LiveCasino = () => {
             supportParent={supportParent}
             openSupportModal={openSupportModal}
           />
-          <div className={getContentClass()}>
-            <div className="container-full">
-              <header className="header">
-                <div className="header-wrapper">
-                  {
-                    isMobile ?
-                      <>
-                        <ProviderContainer
-                          isMobile={isMobile}
-                          categories={categories}
-                          selectedProvider={selectedProvider}
-                          setSelectedProvider={setSelectedProvider}
-                          onProviderSelect={handleProviderSelect}
-                        />
-                        <SearchInput
-                          txtSearch={txtSearch}
-                          setTxtSearch={setTxtSearch}
-                          searchRef={searchRef}
-                          search={search}
-                          isMobile={isMobile}
-                        />
-                      </> :
-                      <nav className="search-nav filled-buttons loaded">
-                        <div className="categories-container container-full-inner">
-                          <div className="row">
-                            <ProviderContainer
-                              isMobile={isMobile}
-                              categories={categories}
-                              selectedProvider={selectedProvider}
-                              setSelectedProvider={setSelectedProvider}
-                              onProviderSelect={handleProviderSelect}
-                            />
-                            <SearchInput
-                              txtSearch={txtSearch}
-                              setTxtSearch={setTxtSearch}
-                              searchRef={searchRef}
-                              search={search}
-                              isMobile={isMobile}
-                            />
-                          </div>
-                        </div>
-                      </nav>
-                  }
-                </div>
-              </header>
+          <LiveCasinoSlideshow />
+          <main className="flex flex-col px-2 md:px-4 py-2">
+            <ProviderContainer
+              isMobile={isMobile}
+              categories={categories}
+              selectedProvider={selectedProvider}
+              setSelectedProvider={setSelectedProvider}
+              onProviderSelect={handleProviderSelect}
+            />
+            <div className="flex flex-col md:flex-row xl:w-full flex-grow xl:items-center gap-2">
+              <div class="flex-grow min-w-0"></div>
+              <SearchInput
+                txtSearch={txtSearch}
+                setTxtSearch={setTxtSearch}
+                searchRef={searchRef}
+                search={search}
+                isMobile={isMobile}
+              />
             </div>
 
             <div className="casino container-full">
-              <div className="games">
-                <div className="games-list">
-                  {games.map((game) => (
-                    <GameCard
-                      key={game.id}
-                      id={game.id}
-                      provider={activeCategory?.name || "Casino"}
-                      title={game.name}
-                      imageSrc={
-                        game.image_local !== null
-                          ? contextData.cdnUrl + game.image_local
-                          : game.image_url
+              <div className="grid grid-cols-3 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 xl:grid-cols-8 py-2">
+                {games.map((game) => (
+                  <GameCard
+                    key={game.id}
+                    id={game.id}
+                    provider={activeCategory?.name || "Casino"}
+                    title={game.name}
+                    imageSrc={
+                      game.image_local !== null
+                        ? contextData.cdnUrl + game.image_local
+                        : game.image_url
+                    }
+                    game={game}
+                    mobileShowMore={mobileShowMore}
+                    onGameClick={(g) => {
+                      if (isLogin) {
+                        launchGame(g, "slot", "modal");
+                      } else {
+                        handleLoginClick();
                       }
-                      game={game}
-                      mobileShowMore={mobileShowMore}
-                      onGameClick={(g) => {
-                        if (isLogin) {
-                          launchGame(g, "slot", "modal");
-                        } else {
-                          handleLoginClick();
-                        }
-                      }}
-                    />
-                  ))}
+                    }}
+                  />
+                ))}
+              </div>
+
+              {isLoadingGames && <LoadApi />}
+
+              {!isLoadingGames && games.length === 0 && (
+                <div className="w-full px-4 py-2 text-center">
+                  <span className="text-white">No se encontraron juegos para este proveedor</span>
                 </div>
+              )}
 
-                {isLoadingGames && <LoadApi />}
-
-                {!isLoadingGames && games.length === 0 && (
-                  <div className="no-games">
-                    <h2>Sin Juegos</h2>
+              {(isExplicitSingleCategoryView || selectedProvider || isSingleCategoryView) &&
+                hasMoreGames &&
+                games.length > 0 && (
+                  <div className="flex justify-center my-5">
+                    <button className="px-6 py-2 rounded-full shadow-xl bg-gradient-to-r from-blue-800 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity" onClick={loadMoreGames}>
+                      Ver más
+                    </button>
                   </div>
                 )}
-
-                {(isExplicitSingleCategoryView || selectedProvider || isSingleCategoryView) &&
-                  hasMoreGames &&
-                  games.length > 0 && (
-                    <div className="load-more-wrapper">
-                      <a className="button" onClick={loadMoreGames}>
-                        VER MÁS
-                      </a>
-                    </div>
-                  )}
-              </div>
             </div>
-          </div>
+          </main>
           <Footer />
         </>
       )}

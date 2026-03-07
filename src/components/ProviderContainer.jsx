@@ -47,7 +47,7 @@ const ProviderContainer = ({
                                 onClick={(e) => handleClick(e, provider)}
                             >
                                 {
-                                    provider.image_local &&
+                                    provider.image_local ?
                                     <div className="w-[100px] h-[40px] md:w-[120px] sm:h-[50px] relative flex items-center justify-center px-2 py-1 transition-all">
                                         <img
                                             className="max-w-full max-h-full object-contain transition-all duration-300"
@@ -57,6 +57,8 @@ const ProviderContainer = ({
                                             width={120}
                                             height={50}
                                         />
+                                    </div> : <div className="w-[100px] h-[40px] md:w-[120px] sm:h-[50px] relative flex items-center justify-center text-center px-2 transition-all text-white text-xs">
+                                        {provider.name}
                                     </div>
                                 }
                             </a>
