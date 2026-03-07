@@ -3020,6 +3020,10 @@ video {
     margin-top: .75rem
 }
 
+button .mt-3 {
+    margin-top: 0;
+}
+
 .mt-4 {
     margin-top: 1rem
 }

@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import { LayoutContext } from "./LayoutContext";
 import { callApi } from "../../utils/Utils";
+import LoginModal from "../Modal/LoginModal";
 import SupportModal from "../Modal/SupportModal";
 import MyProfileModal from "../Modal/MyProfileModal";
 import { NavigationContext } from "./NavigationContext";
@@ -18,6 +19,7 @@ const Layout = () => {
     const [supportEmail, setSupportEmail] = useState("");
     const [supportParent, setSupportParent] = useState("");
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const [showMyProfileModal, setShowMyProfileModal] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -119,7 +121,7 @@ const Layout = () => {
     };
 
     const handleLoginClick = () => {
-        navigate("/login");
+        setShowLoginModal(true);
     }
 
     const handleLogoutClick = () => {
@@ -131,6 +133,11 @@ const Layout = () => {
                 }, 200);
             }
         }, null);
+    };
+
+    const handleLoginSuccess = (balance) => {
+        const parsed = balance ? parseFloat(balance) : 0;
+        setUserBalance(Number.isFinite(parsed) ? parsed : 0);
     };
 
     const handleMyProfileClick = () => {
@@ -158,6 +165,14 @@ const Layout = () => {
                 value={{ selectedPage, setSelectedPage, getPage, showFullDivLoading, setShowFullDivLoading }}
             >
                 <>
+                {showLoginModal && (
+                        <LoginModal
+                            isMobile={isMobile}
+                            isOpen={showLoginModal}
+                            onClose={() => setShowLoginModal(false)}
+                            onLoginSuccess={handleLoginSuccess}
+                        />
+                    )}
                     {showMyProfileModal && (
                         <MyProfileModal
                             isOpen={showMyProfileModal}
