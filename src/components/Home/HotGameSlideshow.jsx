@@ -26,7 +26,6 @@ const HotGameSlideshow = ({ games, name, title, isMobile, icon, link, onGameClic
                     <GameCard
                         key={`hotcard-${name}-${game.id ?? index}-${index}`}
                         id={game.id}
-                        isMobile={isMobile}
                         provider={'Casino'}
                         title={game.name}
                         type="slideshow"

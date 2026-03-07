@@ -13,34 +13,33 @@ const GameSlideshow = ({ games, title, onGameClick, slideshowKey, loadMoreConten
     };
 
     return (
-        <div className="games-group-wrapper">
-            <div className="games-group-title-wrapper">
-                <h3 className="games-group-title">{title}</h3>
-                <div className="games-group-title-line"></div>
-                <a className="games-group-view-all" onClick={loadMoreContent}>Ver Mas &gt;</a>
-            </div>
-
-            <div className="scrollable-window">
-                <div className="games-list-wrapper">
-                    <div className="games-list">
-                        {games?.map((game, index) => {
-                            const keyBase = slideshowKey ? `s${slideshowKey}` : `global`;
-                            const itemKey = `${keyBase}-${game.id}-${index}`;
-                            return (
-                                <GameCard
-                                    key={itemKey}
-                                    id={game.id}
-                                    provider={'Casino'}
-                                    title={game.name}
-                                    imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
-                                    onGameClick={() => handleGameClick(game)}
-                                />
-                            );
-                        })}
-                    </div>
+        <section className="flex w-full justify-between flex-col mt-4 mb-4">
+            <div className="flex w-full justify-between md:pt-2 md:pb-2">
+                <div className="font-bold text-lg md:text-xl flex items-center justify-start gap-2 text-bodyText cursor-default">
+                    <span className="text-nowrap">{title}</span>
                 </div>
+                <a onClick={loadMoreContent} className="flex justify-center items-center">
+                    <button className="px-3 py-1 rounded-full shadow-xl bg-button text-white"> Ver más </button>
+                </a>
             </div>
-        </div>
+            <div className="w-12 mt-2 border-b-2 border-y-cardDivider mb-4"></div>
+
+            <div className="grid grid-cols-3 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 xl:grid-cols-8">
+                {games.slice(0, 8)?.map((game, index) => (
+                    <GameCard
+                        key={`hotcard-${name}-${game.id ?? index}-${index}`}
+                        id={game.id}
+                        provider={'Casino'}
+                        title={game.name}
+                        type="slideshow"
+                        imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
+                        onGameClick={() => {
+                            handleGameClick(game);
+                        }}
+                    />
+                ))}
+            </div>
+        </section>
     );
 };
 

@@ -21,6 +21,13 @@ let selectedGameName = null;
 let selectedGameImg = null;
 let pageCurrent = 0;
 
+import ImgCategoryHome from "/src/assets/svg/home.svg";
+import ImgCategoryPopular from "/src/assets/svg/popular.svg";
+import ImgCategoryBlackjack from "/src/assets/svg/joker.svg";
+import ImgCategoryRoulette from "/src/assets/svg/roulette.svg";
+import ImgCategoryCrash from "/src/assets/svg/crash.svg";
+import ImgCategoryMegaways from "/src/assets/svg/megaway.svg";
+
 const Casino = () => {
   const pageTitle = "Casino";
   const { contextData } = useContext(AppContext);
@@ -47,13 +54,6 @@ const Casino = () => {
   const lastLoadedTagRef = useRef("");
   const pendingCategoryFetchesRef = useRef(0);
   const searchRef = useRef(null);
-
-  const getContentClass = () => {
-    if (txtSearch !== "" || selectedProvider !== null || isSingleCategoryView) {
-      return "normal-mode product-casino a7a-desktop";
-    }
-    return "normal-mode product-home a7a-desktop";
-  };
 
   useEffect(() => {
     if (!location.hash || tags.length === 0) return;
@@ -85,18 +85,18 @@ const Casino = () => {
     const isSlotsOnlyFalse = isSlotsOnly === false || isSlotsOnly === "false";
     let tmpTags = isSlotsOnlyFalse
       ? [
-        { name: "Lobby", code: "home", icon: "icon-all" },
-        { name: "Hot", code: "hot", icon: "icon-favorites" },
-        { name: "Jokers", code: "joker", icon: "icon-videopoker" },
-        { name: "Ruletas", code: "roulette", icon: "icon-table" },
-        { name: "Crash", code: "arcade", icon: "icon-crash" },
-        { name: "Megaways", code: "megaways", icon: "icon-instant" },
+        { name: "Lobby", code: "home", image: ImgCategoryHome },
+        { name: "Favoritos", code: "hot", image: ImgCategoryPopular },
+        { name: "Jokers", code: "joker", image: ImgCategoryBlackjack },
+        { name: "Ruletas", code: "roulette", image: ImgCategoryRoulette },
+        { name: "Crash", code: "arcade", image: ImgCategoryCrash },
+        { name: "Megaways", code: "megaways", image: ImgCategoryMegaways },
       ]
       : [
-        { name: "Lobby", code: "home", icon: "icon-all" },
-        { name: "Hot", code: "hot", icon: "icon-favorites" },
-        { name: "Jokers", code: "joker", icon: "icon-videopoker" },
-        { name: "Megaways", code: "megaways", icon: "icon-instant" },
+        { name: "Lobby", code: "home", image: ImgCategoryHome },
+        { name: "Favoritos", code: "hot", image: ImgCategoryPopular },
+        { name: "Jokers", code: "joker", image: ImgCategoryBlackjack },
+        { name: "Megaways", code: "megaways", image: ImgCategoryMegaways },
       ];
 
     setTags(tmpTags);
@@ -144,12 +144,12 @@ const Casino = () => {
       } else if (result.data && result.data.page_group_type === "games") {
         setIsSingleCategoryView(true);
         setCategories(mainCategories.length > 0 ? mainCategories : []);
-         const gamesWithImages = (result.data.categories || []).map((game) => ({
-           ...game,
-           imageDataSrc: game.image_local !== null
-             ? contextData.cdnUrl + game.image_local
-             : game.image_url,
-         }));
+        const gamesWithImages = (result.data.categories || []).map((game) => ({
+          ...game,
+          imageDataSrc: game.image_local !== null
+            ? contextData.cdnUrl + game.image_local
+            : game.image_url,
+        }));
 
         setGames(gamesWithImages);
         setActiveCategory(tags[tagIndex] || { name: page });
@@ -370,6 +370,7 @@ const Casino = () => {
     setActiveCategory(category);
     setSelectedProvider(null);
     setTxtSearch("");
+    setIsLoadingGames(true);
   };
 
   const handleProviderSelect = (provider, index = 0) => {
@@ -434,6 +435,7 @@ const Casino = () => {
     setActiveCategory({ name: `Búsqueda: "${keyword.trim()}"` });
     setSelectedProvider(null);
     setShowFullDivLoading(true);
+    setIsLoadingGames(true);
 
     let pageSize = 30;
 
@@ -450,6 +452,7 @@ const Casino = () => {
 
   const callbackSearch = (result) => {
     setShowFullDivLoading(false);
+    setIsLoadingGames(false);
 
     if (result.status === 500 || result.status === 422) {
       setGames([]);
@@ -490,199 +493,145 @@ const Casino = () => {
             openSupportModal={openSupportModal}
           />
           <CasinoSlideshow />
-          <div className={getContentClass()}>
-            <div className="container-full">
-              <header className="header">
-                <div className="header-wrapper">
-                  {
-                    isMobile ?
-                      <>
-                        <nav className="tags-nav filled-buttons loaded">
-                          <div className="scrollable-window">
-                            <div className="casino-tags">
-                              <CategoryContainer
-                                categories={tags}
-                                selectedCategoryIndex={selectedCategoryIndex}
-                                selectedProvider={selectedProvider}
-                                onCategoryClick={(tag, _id, _table, index) => {
-                                  setTxtSearch("");
-                                  if (window.location.hash !== `#${tag.code}`) {
-                                    window.location.hash = `#${tag.code}`;
-                                  } else {
-                                    setSelectedCategoryIndex(index);
-                                    getPage(tag.code);
-                                  }
-                                }}
-                                onCategorySelect={handleCategorySelect}
-                                isMobile={isMobile}
-                                pageType="casino"
-                              />
-                            </div>
-                          </div>
-                        </nav>
-                        <ProviderContainer
-                          isMobile={isMobile}
-                          categories={categories}
-                          selectedProvider={selectedProvider}
-                          setSelectedProvider={setSelectedProvider}
-                          onProviderSelect={handleProviderSelect}
-                        />
-                        <SearchInput
-                          txtSearch={txtSearch}
-                          setTxtSearch={setTxtSearch}
-                          searchRef={searchRef}
-                          search={search}
-                          isMobile={isMobile}
-                        />
-                      </> :
-                      <>
-                        <nav className="search-nav filled-buttons loaded">
-                          <div className="categories-container container-full-inner">
-                            <div className="row">
-                              <CategoryContainer
-                                categories={tags}
-                                selectedCategoryIndex={selectedCategoryIndex}
-                                selectedProvider={selectedProvider}
-                                onCategoryClick={(tag, _id, _table, index) => {
-                                  setTxtSearch("");
-                                  if (window.location.hash !== `#${tag.code}`) {
-                                    window.location.hash = `#${tag.code}`;
-                                  } else {
-                                    setSelectedCategoryIndex(index);
-                                    getPage(tag.code);
-                                  }
-                                }}
-                                onCategorySelect={handleCategorySelect}
-                                isMobile={isMobile}
-                                pageType="casino"
-                              />
-                              <SearchInput
-                                txtSearch={txtSearch}
-                                setTxtSearch={setTxtSearch}
-                                searchRef={searchRef}
-                                search={search}
-                                isMobile={isMobile}
-                              />
-                            </div>
-                          </div>
-                        </nav>
-                        <ProviderContainer
-                          isMobile={isMobile}
-                          categories={categories}
-                          selectedProvider={selectedProvider}
-                          setSelectedProvider={setSelectedProvider}
-                          onProviderSelect={handleProviderSelect}
-                        />
-                      </>
+          <main className="flex flex-col px-2 md:px-4 py-2">
+            <ProviderContainer
+              isMobile={isMobile}
+              categories={categories}
+              selectedProvider={selectedProvider}
+              setSelectedProvider={setSelectedProvider}
+              onProviderSelect={handleProviderSelect}
+            />
+            <div className="flex flex-col md:flex-row xl:w-full flex-grow xl:items-center gap-2">
+              <CategoryContainer
+                categories={tags}
+                selectedCategoryIndex={selectedCategoryIndex}
+                selectedProvider={selectedProvider}
+                onCategoryClick={(tag, _id, _table, index) => {
+                  setTxtSearch("");
+                  if (window.location.hash !== `#${tag.code}`) {
+                    window.location.hash = `#${tag.code}`;
+                  } else {
+                    setSelectedCategoryIndex(index);
+                    getPage(tag.code);
                   }
-                </div>
-              </header>
+                }}
+                onCategorySelect={handleCategorySelect}
+                isMobile={isMobile}
+                pageType="casino"
+              />
+
+              <SearchInput
+                txtSearch={txtSearch}
+                setTxtSearch={setTxtSearch}
+                searchRef={searchRef}
+                search={search}
+                isMobile={isMobile}
+              />
             </div>
+
             <div className="casino container-full">
-              <div className="games">
-                {
-                  (txtSearch !== "" || selectedProvider) ? (
-                    <>
-                      <div className="games-list">
-                        {games.map((game, idx) => (
-                          <GameCard
-                            key={`list-${activeCategory?.id || 'search'}-${game.id}-${idx}`}
-                            id={game.id}
-                            provider={activeCategory?.name || "Casino"}
-                            title={game.name}
-                            imageSrc={
-                              game.image_local !== null
-                                ? contextData.cdnUrl + game.image_local
-                                : game.image_url
+              {
+                (txtSearch !== "" || selectedProvider) ? (
+                  <>
+                    <div className="grid grid-cols-3 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 xl:grid-cols-8 py-2">
+                      {games.map((game, idx) => (
+                        <GameCard
+                          key={`list-${activeCategory?.id || 'search'}-${game.id}-${idx}`}
+                          id={game.id}
+                          provider={activeCategory?.name || "Casino"}
+                          title={game.name}
+                          imageSrc={
+                            game.image_local !== null
+                              ? contextData.cdnUrl + game.image_local
+                              : game.image_url
+                          }
+                          game={game}
+                          mobileShowMore={mobileShowMore}
+                          onGameClick={(g) => {
+                            if (isLogin) {
+                              launchGame(g, "slot", "modal");
+                            } else {
+                              handleLoginClick();
                             }
-                            game={game}
-                            mobileShowMore={mobileShowMore}
-                            onGameClick={(g) => {
-                              if (isLogin) {
-                                launchGame(g, "slot", "modal");
-                              } else {
-                                handleLoginClick();
-                              }
-                            }}
-                          />
-                        ))}
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    {isLoadingGames && <LoadApi />}
+
+                    {!isLoadingGames && games.length === 0 && (
+                      <div className="w-full px-4 py-2 text-center">
+                        <span className="text-white">No se encontraron juegos para este proveedor</span>
                       </div>
+                    )}
 
-                      {isLoadingGames && <LoadApi />}
-
-                      {!isLoadingGames && games.length === 0 && (
-                        <div className="no-games">
-                          <h2>Sin Juegos</h2>
+                    {games.length > 0 && (
+                      <div className="flex justify-center my-5">
+                        <button className="px-6 py-2 rounded-full shadow-xl bg-gradient-to-r from-blue-800 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity" onClick={loadMoreGames}>
+                          Ver más
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) :
+                  <>
+                    {isSingleCategoryView ? (
+                      <>
+                        <div className="grid grid-cols-3 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 xl:grid-cols-8 py-2">
+                          {games.map((game, idx) => (
+                            <GameCard
+                              key={`cat-${selectedCategoryIndex}-${game.id}-${idx}`}
+                              id={game.id}
+                              title={game.name}
+                              text={isLogin ? "Jugar" : "Ingresar"}
+                              game={game}
+                              imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
+                              mobileShowMore={mobileShowMore}
+                              onGameClick={() => (isLogin ? launchGame(game, "slot", "modal") : handleLoginClick())}
+                            />
+                          ))}
                         </div>
-                      )}
+                        {isLoadingGames && <LoadApi />}
 
-                      {games.length > 0 && (
-                        <div className="load-more-wrapper">
-                          <a className="button" onClick={loadMoreGames}>
-                            VER MÁS
-                          </a>
-                        </div>
-                      )}
-                    </>
-                  ) :
-                    <>
-                      {isSingleCategoryView ? (
-                        <>
-                          <div className="games-list">
-                            {games.map((game, idx) => (
-                              <GameCard
-                                key={`cat-${selectedCategoryIndex}-${game.id}-${idx}`}
-                                id={game.id}
-                                title={game.name}
-                                text={isLogin ? "Jugar" : "Ingresar"}
-                                game={game}
-                                imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
-                                mobileShowMore={mobileShowMore}
-                                onGameClick={() => (isLogin ? launchGame(game, "slot", "modal") : handleLoginClick())}
-                              />
-                            ))}
+                        {games.length > 0 && (
+                          <div className="flex justify-center my-5">
+                            <button className="px-6 py-2 rounded-full shadow-xl bg-gradient-to-r from-blue-800 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity" onClick={loadMoreGames}>
+                              Ver más
+                            </button>
                           </div>
-                          {isLoadingGames && <LoadApi />}
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {(
+                          firstFiveCategoriesGames.map((entry, catIndex) => {
+                            if (!entry || !entry.games) return null;
 
-                          {games.length > 0 && (
-                            <div className="load-more-wrapper">
-                              <a className="button" onClick={loadMoreGames}>
-                                VER MÁS
-                              </a>
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          {(
-                            firstFiveCategoriesGames.map((entry, catIndex) => {
-                              if (!entry || !entry.games) return null;
-
-                              return (
-                                <GameSlideshow
-                                  key={entry?.category?.id || catIndex}
-                                  games={entry.games}
-                                  title={entry?.category?.name}
-                                  slideshowKey={entry?.category?.id}
-                                  loadMoreContent={() => loadMoreContent(entry.category, catIndex)}
-                                  onGameClick={(g) => {
-                                    if (isLogin) {
-                                      launchGame(g, "slot", "modal");
-                                    } else {
-                                      handleLoginClick();
-                                    }
-                                  }}
-                                />
-                              );
-                            })
-                          )}
-                        </>
-                      )}
-                    </>
-                }
-              </div>
+                            return (
+                              <GameSlideshow
+                                key={entry?.category?.id || catIndex}
+                                games={entry.games}
+                                title={entry?.category?.name}
+                                slideshowKey={entry?.category?.id}
+                                loadMoreContent={() => loadMoreContent(entry.category, catIndex)}
+                                onGameClick={(g) => {
+                                  if (isLogin) {
+                                    launchGame(g, "slot", "modal");
+                                  } else {
+                                    handleLoginClick();
+                                  }
+                                }}
+                              />
+                            );
+                          })
+                        )}
+                      </>
+                    )}
+                  </>
+              }
             </div>
-          </div>
+          </main>
           <Footer />
         </>
       )}
