@@ -590,7 +590,7 @@ const Home = () => {
                       <>
                         {tags[selectedCategoryIndex]?.code === 'home' && (
                           <>
-                            {topGames.length > 0 && (
+                            {topGames && topGames.length > 0 && (
                               <HotGameSlideshow
                                 games={topGames}
                                 name="games"
@@ -607,7 +607,7 @@ const Home = () => {
                                 }}
                               />
                             )}
-                            {topCasino.length > 0 && isSlotsOnly === "false" && (
+                            {topCasino && topCasino.length > 0 && isSlotsOnly === "false" && (
                               <HotGameSlideshow
                                 games={topCasino}
                                 name="casino"
@@ -624,7 +624,7 @@ const Home = () => {
                                 }}
                               />
                             )}
-                            {topLiveCasino.length > 0 && isSlotsOnly === "false" && (
+                            {topLiveCasino && topLiveCasino.length > 0 && isSlotsOnly === "false" && (
                               <HotGameSlideshow
                                 games={topLiveCasino}
                                 name="liveCasino"
@@ -641,7 +641,7 @@ const Home = () => {
                                 }}
                               />
                             )}
-                            {topArcade.length > 0 && isSlotsOnly === "false" && (
+                            {topArcade && topArcade.length > 0 && isSlotsOnly === "false" && (
                               <HotGameSlideshow
                                 games={topArcade}
                                 name="arcade"

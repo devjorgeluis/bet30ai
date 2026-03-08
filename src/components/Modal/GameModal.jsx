@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import LoadGame from "../Loading/LoadGame";
 import { NavigationContext } from "../Layout/NavigationContext";
+import IconClose from "/src/assets/svg/white-close.svg";
 
 const GameModal = (props) => {
   const [url, setUrl] = useState(null);
@@ -128,8 +129,31 @@ const GameModal = (props) => {
 
   return (
     <>
-      <div className="game-window d-none visible landscape">
-        <div className={`game-window-header ${isFullscreen && "full-screen-header"}`}>
+      <div className="min-h-screen flex flex-col">
+        <div className="flex-1">
+          <div className="fixed inset-0 bg-black z-50">
+            <div className="h-full flex flex-col">
+              <div className="bg-cardBackground border-b border-borderColor px-4 py-3 flex items-center justify-between">
+                <h2 className="text-bodyText font-semibold">{props.gameName}</h2>
+                <button className="text-bodyText hover:text-red-500 transition-colors">
+                  <img src={IconClose} onClick={internalClose} />
+                </button>
+              </div>
+              <div className="flex-1">
+                <iframe
+                  allow="camera;microphone;fullscreen *"
+                  src={url}
+                  onLoad={handleIframeLoad}
+                  onError={handleIframeError}
+                  className="w-full h-full border-0"
+                  style={{ width: "100%", height: "100%", border: "none" }}
+                ></iframe>
+                {!iframeLoaded && (
+                  <LoadGame />
+                )}
+              </div>
+            </div>
+          </div>
           <div className="game-window-header-item align-center">
             <span
               className="close-button"
@@ -141,25 +165,6 @@ const GameModal = (props) => {
               title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
             ></span>
           </div>
-        </div>
-
-        {!iframeLoaded && (
-          <div className="game-window-iframe-wrapper">
-            <LoadGame />
-          </div>
-        )}
-
-        <div
-          id="game-window-iframe"
-          className={`game-window-iframe-wrapper${iframeLoaded ? "" : " d-none"}`}
-        >
-          <iframe
-            allow="camera;microphone;fullscreen *"
-            src={url}
-            onLoad={handleIframeLoad}
-            onError={handleIframeError}
-            style={{ width: "100%", height: "100%", border: "none" }}
-          ></iframe>
         </div>
       </div>
     </>
