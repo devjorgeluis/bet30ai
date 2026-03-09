@@ -65,7 +65,7 @@ const Footer = () => {
                             <img loading="lazy" src={ImgLogo} className="w-44 md:w-64 lg:w-72 h-auto contain-content cursor-pointer text-bodyHighlightText drop-shadow-lg" alt="Bet30" />
                         </a>
                     </div>
-                    <div className="flex md:justify-end flex-row items-center gap-4 justify-between">
+                    <div className="flex md:justify-end flex-row items-center gap-4 justify-center">
                         <div className="text-bodyText text-lg font-semibold">
                             <div className="flex justify-between items-center flex-col">
                                 <img src={Img18} className="w-20 h-auto" />

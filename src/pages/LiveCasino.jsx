@@ -402,7 +402,7 @@ const LiveCasino = () => {
               onProviderSelect={handleProviderSelect}
             />
             <div className="flex flex-col md:flex-row xl:w-full flex-grow xl:items-center gap-2">
-              <div class="flex-grow min-w-0"></div>
+              <div className="flex-grow min-w-0"></div>
               <SearchInput
                 txtSearch={txtSearch}
                 setTxtSearch={setTxtSearch}
