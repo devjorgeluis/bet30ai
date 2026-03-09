@@ -272,6 +272,15 @@ const MyProfileModal = ({ isMobile, isOpen, onClose, handleLogoutClick = () => {
                                                         <div className="transaction-date">
                                                             {formatDateTime(item.created_at)}
                                                         </div>
+                                                        <div className="transaction-date">
+                                                            ID: {item.txn_id || item.id}
+                                                        </div>
+                                                        <div className="transaction-date">
+                                                            Balance Previo: $ {formatBalance(item.value_before || item.to_current_balance )}
+                                                        </div>
+                                                        <div className="transaction-date">
+                                                            Balance Posterior: $ {formatBalance(item.value_after || item.to_new_balance )}
+                                                        </div>
                                                     </div>
                                                     <div className="transaction-right">
                                                         <div className={`transaction-amount ${isDeposit ? 'deposit' : 'withdrawal'}`}>
