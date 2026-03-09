@@ -175,6 +175,7 @@ const Layout = () => {
                     )}
                     {showMyProfileModal && (
                         <MyProfileModal
+                            isMobile={isMobile}
                             isOpen={showMyProfileModal}
                             onClose={() => setShowMyProfileModal(false)}
                             handleLogoutClick={handleLogoutClick}

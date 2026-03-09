@@ -10,7 +10,7 @@ import IconArrowUp from "/src/assets/svg/arrow-up.svg";
 import IconClose from "/src/assets/svg/white-close.svg";
 import IconLogout from "/src/assets/svg/logout.svg";
 
-const MyProfileModal = ({ isOpen, onClose, handleLogoutClick = () => { } }) => {
+const MyProfileModal = ({ isMobile, isOpen, onClose, handleLogoutClick = () => { } }) => {
     const { contextData } = useContext(AppContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -193,24 +193,30 @@ const MyProfileModal = ({ isOpen, onClose, handleLogoutClick = () => { } }) => {
                                     {contextData?.session?.user?.id || "No disponible"}
                                 </span>
                             </div>
-                            <div className="info-row">
-                                <span className="info-label">Email:</span>
-                                <span className="info-value">
-                                    {contextData?.session?.user?.email || "No disponible"}
-                                </span>
-                            </div>
+                            {
+                                !isMobile && 
+                                <div className="info-row">
+                                    <span className="info-label">Email:</span>
+                                    <span className="info-value">
+                                        {contextData?.session?.user?.email || "No disponible"}
+                                    </span>
+                                </div>
+                            }
                             <div className="info-row">
                                 <span className="info-label">Usuario:</span>
                                 <span className="info-value">
                                     {contextData?.session?.user?.username || "No disponible"}
                                 </span>
                             </div>
-                            <div className="info-row">
-                                <span className="info-label">Saldo:</span>
-                                <span className="info-value balance">
-                                    $ {formatBalance(contextData?.session?.user?.balance)}
-                                </span>
-                            </div>
+                            {
+                                !isMobile && 
+                                <div className="info-row">
+                                    <span className="info-label">Saldo:</span>
+                                    <span className="info-value balance">
+                                        $ {formatBalance(contextData?.session?.user?.balance)}
+                                    </span>
+                                </div>
+                            }
                         </div>
 
                         <div className="action-buttons">
