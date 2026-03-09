@@ -334,3 +334,11 @@
         height: calc(100% - 50px)
     }
 }
+
+.mobile-footer img.active {
+    filter: brightness(0) saturate(100%) invert(40%) sepia(67%) saturate(976%) hue-rotate(188deg) brightness(102%) contrast(93%);
+}
+
+.z-1000 {
+    z-index: 1000;
+}

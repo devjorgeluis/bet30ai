@@ -75,7 +75,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
 
     return (
         <div
-            className="fixed inset-0 bg-black bg-opacity-75 flex items-center z-20 justify-center h-full w-full"
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center z-1000 justify-center h-full w-full"
         >
             <div
                 className="background relative w-full m-2 rounded-lg max-w-xl shadowModals h-3/4 px-10 flex flex-col justify-center items-center"
