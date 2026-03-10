@@ -1797,7 +1797,7 @@ a {
 }
 
 .tab-btn.active img {
-    filter: brightness(0) saturate(100%) invert(86%) sepia(74%) saturate(5050%) hue-rotate(354deg) brightness(105%) contrast(105%);;
+    filter: brightness(0) saturate(100%) invert(26%) sepia(21%) saturate(5752%) hue-rotate(319deg) brightness(84%) contrast(91%);
 }
 
 .modal-body {
@@ -4850,36 +4850,36 @@ button .mt-3 {
 
 :root {
     --font: "Kumbh Sans";
-    --main_navigation_text_color: #ffffff;
-    --card_background_color: #1a1a1a;
-    --body_text_color: #e0e0e0;
-    --navigation_text_color: #1a1a1a;
-    --theme-primary: #ffe200;
+    --main_navigation_text_color: #eaeaea;
+    --card_background_color: #040024;
+    --body_text_color: #ffffff;
+    --navigation_text_color: linear-gradient(68.8deg, rgb(9, 4, 54) 1.8%, rgb(24, 15, 109) 31.8%, rgb(9, 4, 54) 56.2%, rgb(8, 23, 107) 89%)   !important;
+    --theme-primary: #a72c4a;
     --theme-primary-dark: #b39e00;
-    --theme-primary-light: #ffee66;
+    --theme-primary-light: #ef587d;
     --theme-primary-alpha: rgba(255, 226, 0, 0.2);
-    --body_highlight_text_color: #ffe200;
-    --card_highlight_text_color: #ffe200;
-    --main_navigation_active_text_color: #ffe200;
-    --navigation_active_text_color: #ffe200;
-    --card_divider_color: #ffe200;
-    --scrollbar-thumb: #ffe200;
-    --button_background_color: linear-gradient(135deg, #ffe200 0%, #b39e00 50%, #ffe200 100%);
-    --gradient-primary: linear-gradient(135deg, #ffe200 0%, #b39e00 100%);
-    --hover-color: color-mix(in srgb, #ffe200 80%, white 20%);
+    --body_highlight_text_color: #0f0b33;
+    --card_highlight_text_color: #a72c4a;
+    --main_navigation_active_text_color: #ef587d;
+    --navigation_active_text_color: #a72c4a;
+    --card_divider_color: #ef587d;
+    --scrollbar-thumb: #a72c4a;
+    --button_background_color: linear-gradient(90deg, #95104f 0%, #91063e 10%, #b90a67 25%, #ef2bc8 50%, #b90a67 75%, #91063e 90%, #95104f 100%);
+    --gradient-primary: linear-gradient(135deg, #a72c4a 0%, #b39e00 100%);
+    --hover-color: color-mix(in srgb, #a72c4a 80%, white 20%);
     --theme-secondary: #000000;
     --theme-secondary-light: #0f0f0f;
     --theme-secondary-lighter: #1f1f1f;
-    --body_background_color: #000000;
-    --border_color: #1f1f1f;
-    --navigation_border_color: #1f1f1f;
+    --body_background_color: #000719;
+    --border_color: #041441;
+    --navigation_border_color: #a72c4a;
     --skeleton-color: #0f0f0f;
     --skeleton-highlight: #1f1f1f;
     --scrollbar-track: #0f0f0f;
     --hover-background: #1f1f1f;
     --modal-background: #0f0f0f;
     --gradient-skeleton: linear-gradient(90deg, #0f0f0f 25%, #1f1f1f 50%, #0f0f0f 75%);
-    --shadow: 12px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     --border-when-shadow: 1px;
     --hover-color: color-mix(in srgb, var(--body_highlight_text_color) 80%, white 20%);
     min-height: 100vh;

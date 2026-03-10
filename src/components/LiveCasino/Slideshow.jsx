@@ -6,14 +6,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import ImgSlide1 from "/src/assets/img/live-banner1.webp";
-import ImgSlide2 from "/src/assets/img/live-banner2.webp";
-import ImgSlide3 from "/src/assets/img/live-banner3.webp";
-import ImgSlide4 from "/src/assets/img/live-banner4.webp";
-import ImgMobileSlide1 from "/src/assets/img/mobile-live-banner1.webp";
-import ImgMobileSlide2 from "/src/assets/img/mobile-live-banner2.webp";
-import ImgMobileSlide3 from "/src/assets/img/mobile-live-banner3.webp";
-import ImgMobileSlide4 from "/src/assets/img/mobile-live-banner4.webp";
+import ImgSlide1 from "/src/assets/img/banner1.jpg";
+import ImgMobileSlide1 from "/src/assets/img/mobile-live-banner1.jpg";
+import ImgMobileSlide2 from "/src/assets/img/mobile-live-banner2.jpg";
+
 
 const LiveCasinoSlideshow = () => {
   const swiperRef = useRef(null);
@@ -22,13 +18,8 @@ const LiveCasinoSlideshow = () => {
   const slides = isMobile ? [
     { id: 0, image: ImgMobileSlide1 },
     { id: 1, image: ImgMobileSlide2 },
-    { id: 2, image: ImgMobileSlide3 },
-    { id: 3, image: ImgMobileSlide4 },
   ] : [
     { id: 0, image: ImgSlide1 },
-    { id: 1, image: ImgSlide2 },
-    { id: 2, image: ImgSlide3 },
-    { id: 3, image: ImgSlide4 },
   ];
 
   return (

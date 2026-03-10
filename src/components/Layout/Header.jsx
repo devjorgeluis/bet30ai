@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import ImgSupport from "/src/assets/svg/support-black.svg";
 import ImgHamburger from "/src/assets/svg/hamburger.svg";
 import ImgProfile from "/src/assets/svg/profile.svg";
@@ -80,7 +80,7 @@ const Header = ({
     );
 
     const MobileSidebar = () => (
-        <div className={`fixed top-0 left-0 h-full w-72 bg-navigationText border-r border-navigationBorder z-1000 overflow-y-auto md:hidden transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`bg-color-nav fixed top-0 left-0 h-full w-72 bg-navigationText border-r border-navigationBorder z-1000 overflow-y-auto md:hidden transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="flex items-center justify-between p-4 border-b border-navigationBorder">
                 <img src={ImgLogo} className="h-8 w-auto" alt="Bet30" />
                 <button className="p-2 rounded-full hover:bg-cardBackground transition-colors" onClick={() => setSidebarOpen(false)}>

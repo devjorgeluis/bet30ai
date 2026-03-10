@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import { callApi } from "../../utils/Utils";
 import LoadApi from "../Loading/LoadApi";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import IconClose from "/src/assets/svg/close.svg";
 import IconEye from "/src/assets/svg/eye.svg";
 import IconEyeSlash from "/src/assets/svg/eye-slash.svg";
@@ -39,7 +39,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         const body = {
             username: username,
             password: password,
-            site_label: "ganaencasa",
+            site_label: "zeuspro",
         };
 
         callApi(
