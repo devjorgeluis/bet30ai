@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useOutletContext } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -9,12 +10,24 @@ import ImgSlide1 from "/src/assets/img/banner1.webp";
 import ImgSlide2 from "/src/assets/img/banner2.webp";
 import ImgSlide3 from "/src/assets/img/banner3.webp";
 import ImgSlide4 from "/src/assets/img/banner4.webp";
+import ImgMobileSlide1 from "/src/assets/img/mobile-banner1.webp";
+import ImgMobileSlide2 from "/src/assets/img/mobile-banner2.webp";
+import ImgMobileSlide3 from "/src/assets/img/mobile-banner3.webp";
+import ImgMobileSlide4 from "/src/assets/img/mobile-banner4.webp";
+
 
 const CasinoSlideshow = () => {
   const swiperRef = useRef(null);
-  const slides = [
-    { id: 0, image: ImgSlide2 },
-    { id: 1, image: ImgSlide1 },
+  const { isMobile } = useOutletContext();
+
+  const slides = isMobile ? [
+    { id: 0, image: ImgMobileSlide1 },
+    { id: 1, image: ImgMobileSlide2 },
+    { id: 2, image: ImgMobileSlide3 },
+    { id: 3, image: ImgMobileSlide4 },
+  ] : [
+    { id: 0, image: ImgSlide1 },
+    { id: 1, image: ImgSlide2 },
     { id: 2, image: ImgSlide3 },
     { id: 3, image: ImgSlide4 },
   ];
