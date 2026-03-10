@@ -39,7 +39,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         const body = {
             username: username,
             password: password,
-            site_label: "main",
+            site_label: "ganaencasa",
         };
 
         callApi(

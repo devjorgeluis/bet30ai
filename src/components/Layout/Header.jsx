@@ -5,7 +5,6 @@ import ImgSupport from "/src/assets/svg/support-black.svg";
 import ImgHamburger from "/src/assets/svg/hamburger.svg";
 import ImgProfile from "/src/assets/svg/profile.svg";
 import ImgClose from "/src/assets/svg/white-close.svg";
-import ImgHome from "/src/assets/svg/mobile-home.svg";
 import ImgCasino from "/src/assets/svg/mobile-casino.svg";
 import ImgLiveCasino from "/src/assets/svg/mobile-live-casino.svg";
 import ImgSports from "/src/assets/svg/mobile-sports.svg";
@@ -81,7 +80,7 @@ const Header = ({
     );
 
     const MobileSidebar = () => (
-        <div className={`fixed top-0 left-0 h-full w-72 bg-navigationText border-r border-navigationBorder z-50 overflow-y-auto md:hidden transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`fixed top-0 left-0 h-full w-72 bg-navigationText border-r border-navigationBorder z-1000 overflow-y-auto md:hidden transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="flex items-center justify-between p-4 border-b border-navigationBorder">
                 <img src={ImgLogo} className="h-8 w-auto" alt="Bet30" />
                 <button className="p-2 rounded-full hover:bg-cardBackground transition-colors" onClick={() => setSidebarOpen(false)}>
@@ -90,22 +89,22 @@ const Header = ({
             </div>
             <div className="pt-4">
                 <h3 className="px-4 py-2 text-sm font-semibold text-gray-400 uppercase">Deportes</h3>
-                <a onClick={() => { navigate("/sports"); setSidebarOpen(false); }} className="flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground">
+                <a onClick={() => { navigate("/sports"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/sports") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
                     <img src={ImgSports} className="w-6 h-6" />
                     <span className="text-base">Deportes</span>
                 </a>
-                <a onClick={() => { navigate("/live-sports"); setSidebarOpen(false); }} className="flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground">
+                <a onClick={() => { navigate("/live-sports"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/live-sports") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
                     <img src={ImgLiveSports} className="w-6 h-6" />
                     <span className="text-base">En vivo</span>
                 </a>
             </div>
             <div className="pt-4">
                 <h3 className="px-4 py-2 text-sm font-semibold text-gray-400 uppercase">Games</h3>
-                <a onClick={() => { navigate("/casino"); setSidebarOpen(false); }} className="flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground">
+                <a onClick={() => { navigate("/casino"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/casino") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
                     <img src={ImgCasino} className="w-6 h-6" />
                     <span className="text-base">Casino</span>
                 </a>
-                <a onClick={() => { navigate("/live-casino"); setSidebarOpen(false); }} className="flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground">
+                <a onClick={() => { navigate("/live-casino"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/live-casino") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
                     <img src={ImgLiveCasino} className="w-6 h-6" />
                     <span className="text-base">En vivo</span>
                 </a>
@@ -133,48 +132,50 @@ const Header = ({
     )
 
     return (
-        <div className="w-full min-h-16 bg-color-nav flex justify-between items-center px-3 sticky top-0 z-50">
-            <div className="flex items-center gap-2">
-                <button className="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors flex-shrink-0" onClick={() => setSidebarOpen(true)}>
-                    <img src={ImgHamburger} className="text-gray-300" />
-                </button>
-                <div className="flex-shrink-0">
-                    <a onClick={() => navigate("/")} className="router-link-active router-link-exact-active" aria-current="page">
-                        <img src={ImgLogo} className="w-[5.5rem] max-h-[170px] md:w-40 md:my-1 contain-content cursor-pointer" alt="Bet30" />
-                    </a>
+        <>
+            <div className="w-full min-h-16 bg-color-nav flex justify-between items-center px-3 sticky top-0 z-50">
+                <div className="flex items-center gap-2">
+                    <button className="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors flex-shrink-0" onClick={() => setSidebarOpen(true)}>
+                        <img src={ImgHamburger} className="text-gray-300" />
+                    </button>
+                    <div className="flex-shrink-0">
+                        <a onClick={() => navigate("/")} className="router-link-active router-link-exact-active bg-button" aria-current="page">
+                            <img src={ImgLogo} className="w-[5.5rem] max-h-[170px] md:w-40 md:my-1 contain-content cursor-pointer" alt="Bet30" />
+                        </a>
+                    </div>
+                </div>
+                <NavLinks />
+                <div className="flex items-center gap-2">
+                    <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                        <img src={ImgSupport} />
+                    </button>
+                    {
+                        isLogin ?
+                            <>
+                                <div className="flex items-center justify-center">
+                                    <button className="relative p-[1px] rounded-full group bg-button">
+                                        <div className="px-3 py-1 md:px-2 bg-provider-color rounded-full group-hover:bg-opacity-90 transition-all duration-300">
+                                            <span className="text-bodyText text-sm xl:text-lg text-nowrap font-bold"> $ {formatBalance(userBalance)} </span>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button className="relative p-[1px] rounded-full group bg-button" onClick={() => handleMyProfileClick()}>
+                                        <div className="px-2 py-2 bg-provider-color rounded-full group-hover:bg-opacity-90 transition-all duration-300 flex justify-center items-center">
+                                            <img src={ImgProfile} className="w-5 h-5 text-white" />
+                                        </div>
+                                    </button>
+                                </div>
+                            </> :
+                            <button className="px-3 py-2 rounded-full h-full bg-button flex gap-1" onClick={handleLoginClick}>
+                                <span className="text-white">Acceder</span>
+                                <img src={ImgProfile} className="w-5 h-5 text-white" />
+                            </button>
+                    }
                 </div>
             </div>
-            <NavLinks />
             {sidebarOpen && <MobileSidebar />}
-            <div className="flex items-center gap-2">
-                <button className="button-support" onClick={() => { openSupportModal(false); }}>
-                    <img src={ImgSupport} />
-                </button>
-                {
-                    isLogin ?
-                        <>
-                            <div className="flex items-center justify-center">
-                                <button className="relative p-[1px] rounded-full group bg-button">
-                                    <div className="px-3 py-1 md:px-2 bg-provider-color rounded-full group-hover:bg-opacity-90 transition-all duration-300">
-                                        <span className="text-bodyText text-sm xl:text-lg text-nowrap font-bold"> $ {formatBalance(userBalance)} </span>
-                                    </div>
-                                </button>
-                            </div>
-                            <div>
-                                <button className="relative p-[1px] rounded-full group bg-button" onClick={() => handleMyProfileClick()}>
-                                    <div className="px-2 py-2 bg-provider-color rounded-full group-hover:bg-opacity-90 transition-all duration-300 flex justify-center items-center">
-                                        <img src={ImgProfile} className="w-5 h-5 text-white" />
-                                    </div>
-                                </button>
-                            </div>
-                        </> :
-                        <button className="px-3 py-2 rounded-full h-full bg-button flex gap-1" onClick={handleLoginClick}>
-                            <span className="text-white">Acceder</span>
-                            <img src={ImgProfile} className="w-5 h-5 text-white" />
-                        </button>
-                }
-            </div>
-        </div>
+        </>
     );
 };
 
