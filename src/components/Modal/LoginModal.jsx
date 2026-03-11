@@ -106,7 +106,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         <input
                             type="text"
                             id="email"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-inputBackground border-inputBorder placeholder-gray-400"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-[#212c36] border-gray-600 placeholder-gray-400"
                             placeholder="Usuario"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -116,7 +116,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         <div className="relative w-full">
                             <input
                                 id="password"
-                                className="shadow appearance-none border rounded w-full py-2 pl-2 pr-10 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-inputBackground border-inputBorder placeholder-gray-400"
+                                className="shadow appearance-none border rounded w-full py-2 pl-2 pr-10 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-[#212c36] border-gray-600 placeholder-gray-400"
                                 placeholder="Contraseña"
                                 type={showPassword ? "text" : "password"}
                                 value={password}

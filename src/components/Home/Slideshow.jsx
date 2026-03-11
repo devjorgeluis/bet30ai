@@ -1,4 +1,4 @@
-import VideoSlideshow from "/src/assets/video/slideshow.mp4";
+import ImgSlideshow from "/src/assets/img/banner.jpg";
 
 const Slideshow = () => {
   return (
@@ -6,16 +6,14 @@ const Slideshow = () => {
       <div className="media-carousel w-full overflow-hidden">
         <div className="relative w-full">
           <div className="media-item relative w-full overflow-hidden lg:h-[500px]">
-            <video 
-              src={VideoSlideshow} 
+            <img 
+              src={ImgSlideshow} 
               autoPlay 
               muted 
               loop 
               playsInline
-              className="w-full h-full object-cover mask-gradient max-h-[70vh]"
-            >
-              Your browser does not support the video tag.
-            </video>
+              className="w-full h-auto mask-gradient"
+            />
           </div>
         </div>
       </div>

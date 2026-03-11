@@ -7,10 +7,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import ImgSlide1 from "/src/assets/img/banner1.jpg";
-import ImgMobileSlide1 from "/src/assets/img/mobile-banner1.jpg";
-import ImgMobileSlide2 from "/src/assets/img/mobile-banner2.jpg";
-import ImgMobileSlide3 from "/src/assets/img/mobile-banner3.jpg";
-import ImgMobileSlide4 from "/src/assets/img/mobile-banner4.jpg";
+import ImgMobileSlide1 from "/src/assets/img/mobile-banner1.png";
+import ImgMobileSlide2 from "/src/assets/img/banner.jpg";
 
 
 const CasinoSlideshow = () => {
@@ -20,8 +18,6 @@ const CasinoSlideshow = () => {
   const slides = isMobile ? [
     { id: 0, image: ImgMobileSlide1 },
     { id: 1, image: ImgMobileSlide2 },
-    { id: 2, image: ImgMobileSlide3 },
-    { id: 3, image: ImgMobileSlide4 },
   ] : [
     { id: 0, image: ImgSlide1 },
   ];

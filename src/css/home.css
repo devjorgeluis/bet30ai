@@ -336,9 +336,14 @@
 }
 
 .mobile-footer img.active {
-    filter: brightness(0) saturate(100%) invert(44%) sepia(90%) saturate(1615%) hue-rotate(314deg) brightness(99%) contrast(89%);
+    filter: brightness(0) saturate(100%) invert(52%) sepia(52%) saturate(6896%) hue-rotate(304deg) brightness(102%) contrast(94%);
 }
 
 .z-1000 {
     z-index: 1000;
+}
+
+.bg-\[\#212c36\] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(33 44 54 / var(--tw-bg-opacity, 1));
 }
