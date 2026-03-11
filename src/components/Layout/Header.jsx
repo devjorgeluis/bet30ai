@@ -80,34 +80,40 @@ const Header = ({
     );
 
     const MobileSidebar = () => (
-        <div className={`fixed top-0 left-0 h-full w-72 bg-navigationText border-r border-navigationBorder z-1000 overflow-y-auto md:hidden transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`bg-color-nav fixed top-0 left-0 h-full w-72 bg-navigationText border-r border-navigationBorder z-1000 overflow-y-auto md:hidden transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="flex items-center justify-between p-4 border-b border-navigationBorder">
                 <img src={ImgLogo} className="h-8 w-auto" alt="Bet30" />
                 <button className="p-2 rounded-full hover:bg-cardBackground transition-colors" onClick={() => setSidebarOpen(false)}>
                     <img src={ImgClose} className="text-mainNavigationTextColor" />
                 </button>
             </div>
-            <div className="pt-4">
-                <h3 className="px-4 py-2 text-sm font-semibold text-gray-400 uppercase">Deportes</h3>
-                <a onClick={() => { navigate("/sports"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/sports") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
-                    <img src={ImgSports} className="w-6 h-6" />
-                    <span className="text-base">Deportes</span>
-                </a>
-                <a onClick={() => { navigate("/live-sports"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/live-sports") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
-                    <img src={ImgLiveSports} className="w-6 h-6" />
-                    <span className="text-base">En vivo</span>
-                </a>
-            </div>
+            {
+                isSlotsOnly === "false" &&
+                <div className="pt-4">
+                    <h3 className="px-4 py-2 text-sm font-semibold text-gray-400 uppercase">Deportes</h3>
+                    <a onClick={() => { navigate("/sports"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/sports") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
+                        <img src={ImgSports} className="w-6 h-6" />
+                        <span className="text-base">Deportes</span>
+                    </a>
+                    <a onClick={() => { navigate("/live-sports"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/live-sports") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
+                        <img src={ImgLiveSports} className="w-6 h-6" />
+                        <span className="text-base">En vivo</span>
+                    </a>
+                </div>
+            }
             <div className="pt-4">
                 <h3 className="px-4 py-2 text-sm font-semibold text-gray-400 uppercase">Games</h3>
                 <a onClick={() => { navigate("/casino"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/casino") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
                     <img src={ImgCasino} className="w-6 h-6" />
                     <span className="text-base">Casino</span>
                 </a>
-                <a onClick={() => { navigate("/live-casino"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/live-casino") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
-                    <img src={ImgLiveCasino} className="w-6 h-6" />
-                    <span className="text-base">En vivo</span>
-                </a>
+                {
+                    isSlotsOnly === "false" && 
+                    <a onClick={() => { navigate("/live-casino"); setSidebarOpen(false); }} className={`flex items-center gap-3 px-6 py-3 transition-colors text-white hover:bg-cardBackground ${isActive("/live-casino") ? "router-link-active router-link-exact-active bg-button" : ""}`}>
+                        <img src={ImgLiveCasino} className="w-6 h-6" />
+                        <span className="text-base">En vivo</span>
+                    </a>
+                }
             </div>
             {
                 supportParent && 
