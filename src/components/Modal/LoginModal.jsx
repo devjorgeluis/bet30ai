@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import { callApi } from "../../utils/Utils";
 import LoadApi from "../Loading/LoadApi";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import IconClose from "/src/assets/svg/close.svg";
 import IconEye from "/src/assets/svg/eye.svg";
 import IconEyeSlash from "/src/assets/svg/eye-slash.svg";
@@ -39,7 +39,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         const body = {
             username: username,
             password: password,
-            site_label: "ganaencasa",
+            site_label: "zeuspro",
         };
 
         callApi(
@@ -106,7 +106,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         <input
                             type="text"
                             id="email"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-inputBackground border-inputBorder placeholder-gray-400"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-[#212c36] border-gray-600 placeholder-gray-400"
                             placeholder="Usuario"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -116,7 +116,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         <div className="relative w-full">
                             <input
                                 id="password"
-                                className="shadow appearance-none border rounded w-full py-2 pl-2 pr-10 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-inputBackground border-inputBorder placeholder-gray-400"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-bodyText leading-tight focus:outline-none focus:shadow-outline bg-[#212c36] border-gray-600 placeholder-gray-400"
                                 placeholder="Contraseña"
                                 type={showPassword ? "text" : "password"}
                                 value={password}

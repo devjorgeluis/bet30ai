@@ -450,7 +450,7 @@ const LiveCasino = () => {
                 hasMoreGames &&
                 games.length > 0 && (
                   <div className="flex justify-center my-5">
-                    <button className="px-6 py-2 rounded-full shadow-xl bg-gradient-to-r from-blue-800 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity" onClick={loadMoreGames}>
+                    <button className="bg-button px-2 py-1 w-full rounded-md" onClick={loadMoreGames}>
                       Ver más
                     </button>
                   </div>

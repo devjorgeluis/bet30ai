@@ -1,5 +1,5 @@
 import { useOutletContext, useNavigate, useLocation } from "react-router-dom";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import Img18 from "/src/assets/svg/18.svg";
 import ImgHome from "/src/assets/svg/mobile-home.svg";
 import ImgCasino from "/src/assets/svg/mobile-casino.svg";
@@ -87,7 +87,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <nav className="mobile-footer md:hidden fixed bottom-0 left-0 right-0 z-50 bg-navigationText flex justify-between items-center px-1 min-h-16 pb-safe">
+            <nav className="mobile-footer fixed bottom-0 w-full bg-color-nav flex justify-between items-center px-1 md:hidden min-h-16">
                 <ul className="flex gap-5 justify-center items-center w-full h-full min-h-16 list-none m-0 p-0">
                     {isSlotsOnly === "false" ? (
                         <>
