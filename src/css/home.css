@@ -3,7 +3,7 @@
 .button-support {
     display: inline-flex;
     height: 30px;
-    background: rgb(36, 133, 243);
+    background: var(--button_background_color);
     text-transform: uppercase;
     font-weight: bold;
     align-items: center;
@@ -194,7 +194,7 @@
     cursor: pointer;
     min-width: 100px;
     height: 30px;
-    background: rgb(36, 133, 243);
+    background: var(--button_background_color);
     justify-content: center;
     align-items: center;
     font-weight: 700;
@@ -336,7 +336,7 @@
 }
 
 .mobile-footer img.active {
-    filter: brightness(0) saturate(100%) invert(40%) sepia(67%) saturate(976%) hue-rotate(188deg) brightness(102%) contrast(93%);
+    filter: brightness(0) saturate(100%) invert(86%) sepia(74%) saturate(5050%) hue-rotate(354deg) brightness(105%) contrast(105%);
 }
 
 .z-1000 {
